@@ -3,8 +3,19 @@ import { body, validationResult } from "express-validator";
 import { errorHandler } from "../middlewares/error-handler";
 import { RequestValidationError } from "../errors/request-validation-error";
 import { DatabaseConnectionError } from "../errors/database-connection-error";
+import { User } from "../models/user";
+import { BadRequestError } from "../errors/bad-request-error";
 
 const router = express.Router();
+
+router.get("/api/users/getall", (req: Request, res: Response) =>
+  User.find({}, function (err: any, users: any) {
+    if (err) {
+      throw new DatabaseConnectionError();
+    }
+    res.json(users);
+  })
+);
 
 router.post(
   "/api/users/signup",
@@ -19,22 +30,23 @@ router.post(
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       throw new RequestValidationError(errors.array());
-      errorHandler(
-        new RequestValidationError(errors.array()),
-        req,
-        res,
-        () => {}
-      );
     }
 
     const { email, password } = req.body;
 
-    console.log("Creating a new user ...");
-    throw new DatabaseConnectionError();
-
-    // errorHandler(new Error(), req, res, () => {});
-
-    // res.send({});
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      throw new BadRequestError("User already exists");
+    }
+    const user = User.build({ email, password });
+    user
+      .save()
+      .then(() => {
+        res.status(201).send(user);
+      })
+      .catch((err) => {
+        throw new DatabaseConnectionError();
+      });
   }
 );
 
