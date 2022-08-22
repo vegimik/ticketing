@@ -5,6 +5,8 @@ import { RequestValidationError } from "../errors/request-validation-error";
 import { DatabaseConnectionError } from "../errors/database-connection-error";
 import { User } from "../models/user";
 import { BadRequestError } from "../errors/bad-request-error";
+import jwt from "jsonwebtoken";
+import config from "../config";
 
 const router = express.Router();
 
@@ -36,10 +38,10 @@ router.post(
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      throw new BadRequestError("User already exists");
+      return new BadRequestError("User already exists");
     }
     const user = User.build({ email, password });
-    user
+    await user
       .save()
       .then(() => {
         res.status(201).send(user);
@@ -47,6 +49,28 @@ router.post(
       .catch((err) => {
         throw new DatabaseConnectionError();
       });
+
+    // Generate JWT
+    if (!process.env.JWT_KEY) {
+      throw new Error("JWT_KEY is not defined");
+    }
+
+    console.log(process.env.JWT_KEY);
+    const userJwt = jwt.sign(
+      {
+        id: user.id,
+        email: user.email,
+      },
+      process.env.JWT_KEY
+      // config.secret
+    );
+
+    // Store the user id in a JWT token
+    req.session = {
+      jwt: userJwt
+    };
+
+    res.status(201).send(user);
   }
 );
 
