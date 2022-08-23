@@ -32,8 +32,8 @@ app.all("*", async (req, res, next) => {
 });
 
 mongoDB(mongoose);
-app.use(errorHandler);
 
+app.use(errorHandler);
 app.listen(3000, () => {
   console.log("listening on port 3000!!!");
 });

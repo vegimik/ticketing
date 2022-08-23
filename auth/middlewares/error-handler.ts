@@ -7,6 +7,9 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  console.log('====================================');
+  console.log('Error executing start here');
+  console.log('====================================');
   if (err instanceof CustomError) {
     res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
@@ -14,4 +17,6 @@ export const errorHandler = (
   res.status(400).json({
     message: err.message,
   });
+  console.log('Error executing ends here');
+  console.log('====================================');
 };
