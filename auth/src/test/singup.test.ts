@@ -1,7 +1,7 @@
 import request from "supertest";
 import { app } from "../app";
 
-it("Return a 201 on a successful singpup", async () => {
+it("Return a 201 on a successful singup", async () => {
   return await request(app)
     .post("/api/users/signup")
     .send({
@@ -24,7 +24,7 @@ it("Return a 400 with an invalid email", async () => {
   //expect(response.body.user.email).toEqual("sample@gmail.com")
 });
 
-it("Return a 400 with an invalid email", async () => {
+it("Return a 400 with an invalid password", async () => {
   return await request(app)
     .post("/api/users/signup")
     .send({
@@ -65,4 +65,17 @@ it("disallows duplicate emails", async () => {
   //     password: "password",
   //   })
   //   .expect(400);
+});
+
+it("sets a cookie after successful signup", async () => {
+  const response = await request(app)
+    .post("/api/users/signup")
+    .send({
+      email: "sample@gmail.com",
+      password: "password",
+    })
+    .expect(201);
+    console.log(response.get("Set-Cookie"));
+    
+  expect(response.get("Set-Cookie")).toBeDefined();
 });
