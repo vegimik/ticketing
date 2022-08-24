@@ -4,7 +4,7 @@ import { Strategy as JwtStrategy } from "passport-jwt";
 import { ExtractJwt } from "passport-jwt";
 import { Strategy as LocalStrategy } from "passport-local";
 import { PasswordService } from "./password";
-import config from "../config";
+import config from "../../config";
 
 // Create local strategy
 const localOptions = { usernameField: "email" };

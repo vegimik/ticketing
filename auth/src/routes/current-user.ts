@@ -1,8 +1,5 @@
 import express from "express";
-import { header } from "express-validator";
-import jwt from "jsonwebtoken";
 import { currentUser } from "../middlewares/current-user";
-import { User } from "../models/user";
 import { requireAuth } from "../services/passport";
 
 const router = express.Router();

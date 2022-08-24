@@ -7,7 +7,7 @@ import { DatabaseConnectionError } from "../errors/database-connection-error";
 import { User } from "../models/user";
 import { BadRequestError } from "../errors/bad-request-error";
 import jwt from "jsonwebtoken";
-import config from "../config";
+import config from "../../config";
 
 const router = express.Router();
 
