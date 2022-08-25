@@ -12,7 +12,7 @@ import config from "../../config";
 const router = express.Router();
 
 router.get("/api/users/getall", (req: Request, res: Response) =>
-  User.find({}, function (err: any, users: any) {
+  User.find({}, function (err: any, users : any) {
     if (err) {
       throw new DatabaseConnectionError();
     }
