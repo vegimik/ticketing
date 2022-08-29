@@ -1,32 +1,36 @@
-import axios from 'axios';
-import useRequest from '../hooks/use-request';
+import buildClient from "../api/build.client";
+import axios from "axios";
 
 const LoadingPage= ({ currentUser})=>{
     console.log(currentUser);
 
-
-    return <h1>Loading, HomePage ...</h1>
+    return currentUser?
+    (<h1>You are signed in</h1>)
+    :
+    (<h1>You are NOT signed in</h1>)
 }
 
-LoadingPage.getInitialProps = async (context)=>{
+LoadingPage.getInitialProps = async context=>{
+    console.log(context);
+    
+    let client={};
     if (typeof window === 'undefined') {
         //we are on the server
-        const {data} = await axios.get('http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser', {
-            headers:{
-            Host: 'ticketing.dev'
-            }
-    });
-        return data;
+        client= axios.create({
+            baseURL: 'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local',
+        })
     }
     else{
         //we are on the browser
-        var {data}=await axios.get('/api/users/currentuser')
-        return data;
-    }
-    
+        client= axios.create({
+            baseURL:'/'
+        })
+        }
 
-    console.log('I am in the getInitialProps');
-    return {}; //response.data
-}
+        
+    const { data } = await client.get('/api/users/currentuser');
+  
+    return data;
+}    
 
 export default LoadingPage;
