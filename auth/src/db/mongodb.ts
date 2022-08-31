@@ -1,5 +1,9 @@
 export async function mongoDB(mongoose: any) {
-  if (!process.env.JWT_KEY) {
+  console.log(process.env.ALLUSERSPROFILE);
+  console.log(process.env.JWT_KEY);
+  // console.log(process.env);
+  
+  if (!process.env.k) {
     throw new Error("JWT_KEY is not defined");
   }
 

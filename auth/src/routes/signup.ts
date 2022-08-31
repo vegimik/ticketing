@@ -1,18 +1,20 @@
-import { validateRequest } from './../middlewares/validate-request';
+import {
+  validateRequest,
+  errorHandler,
+  RequestValidationError,
+  DatabaseConnectionError,
+  BadRequestError,
+} from "@wegotickets/common";
 import express, { Request, Response } from "express";
 import { body, validationResult } from "express-validator";
-import { errorHandler } from "../middlewares/error-handler";
-import { RequestValidationError } from "../errors/request-validation-error";
-import { DatabaseConnectionError } from "../errors/database-connection-error";
 import { User } from "../models/user";
-import { BadRequestError } from "../errors/bad-request-error";
 import jwt from "jsonwebtoken";
 import config from "../../config";
 
 const router = express.Router();
 
 router.get("/api/users/getall", (req: Request, res: Response) =>
-  User.find({}, function (err: any, users : any) {
+  User.find({}, function (err: any, users: any) {
     if (err) {
       throw new DatabaseConnectionError();
     }
@@ -67,7 +69,6 @@ router.post(
     //   jwt: userJwt
     // };
     res.cookie("jwt", userJwt);
-
 
     res.status(201).send(user);
   }
