@@ -30,3 +30,7 @@ Publisher program -> [NodePort Service <--> NATS Pod]
 Option 3:
 Publisher program -> [Port Forward Port 4222 <--> NATS Pod]
 
+kubectl port-forward nats_pod_id port_source:port_target
+
+
+# For monitoring fo to: localhost:8222, for more info explore over links
