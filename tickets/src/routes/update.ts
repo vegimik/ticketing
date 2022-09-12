@@ -1,5 +1,4 @@
-import { requireAuth } from "./../../../common/src/middlewares/require-auth";
-import { NotFoundError, NotAuthorizedError } from "@wegotickets/common";
+import { NotFoundError, NotAuthorizedError, requireAuth } from "@wegotickets/common";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import { Ticket } from "../models/ticket";
