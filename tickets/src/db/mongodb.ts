@@ -1,5 +1,4 @@
 import { randomBytes } from 'crypto';
-import { natsWrapper } from "../nats-wrapper";
 
 export async function mongoDB(mongoose: any) {
   console.log(process.env.ALLUSERSPROFILE);
@@ -15,7 +14,6 @@ export async function mongoDB(mongoose: any) {
   }
 
   try {
-    await natsWrapper.connect('ticketing', randomBytes(4).toString("hex"), 'http://nats-srv:4222');
     await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to mongodb!");
   } catch (error) {
