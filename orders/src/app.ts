@@ -3,6 +3,9 @@ import { json } from "body-parser";
 import { errorHandler, NotFoundError, currentUser } from "@wegotickets/common";
 import cookieSession from "cookie-session";
 import jwt from "jsonwebtoken";
+import { createOrderRouter } from "./routes/new";
+import { getOrderRouter } from "./routes/show";
+import { deleteOrderRouter } from "./routes/delete";
 // import { CreateTicketRouter } from "./routes/new";
 // import { ShowTicketRouter } from "./routes/show";
 // import { indexTicketRouter } from "./routes";
@@ -19,10 +22,9 @@ app.use(
 );
 
 app.use(currentUser);
-// app.use(CreateTicketRouter);
-// app.use(ShowTicketRouter);
-// app.use(indexTicketRouter);
-// app.use(updateTicketRouter);
+app.use(getOrderRouter);
+app.use(createOrderRouter);
+app.use(deleteOrderRouter);
 
 app.all("*", async (req, res, next) => {
   throw new NotFoundError();
