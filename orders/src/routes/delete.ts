@@ -1,6 +1,8 @@
 import { NotAuthorizedError, NotFoundError } from "@wegotickets/common";
 import express from "express";
+import OrderCacelledPublisher from "../events/publishers/order-cancelled-publisher";
 import { Order } from "../models/order";
+import { natsWrapper } from "../nats-wrapper";
 import { OrderStatus } from "../types/order-status";
 
 const router = express.Router();
@@ -16,6 +18,13 @@ router.delete("/api/orders/:orderId", async (req, res) => {
   }
   order.status = OrderStatus.Cancelled;
   await order.save();
+  
+  new OrderCacelledPublisher(natsWrapper.client).publish({
+    id: order.id,
+    ticket: {
+      id: order.ticket.id,
+    },
+  });
 
   res.status(204).send(order);
 });
