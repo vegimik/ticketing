@@ -32,6 +32,13 @@ afterAll(async () => {
 });
 
 declare global {
+  namespace NodeJS {
+    export interface Global {
+      signin(): string[];
+    }
+  }
+}
+declare global {
   var signin: () => string[];
 }
 

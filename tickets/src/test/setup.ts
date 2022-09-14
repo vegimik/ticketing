@@ -32,13 +32,13 @@ afterAll(async () => {
   await mongoose.connection.close();
 });
 
-declare global {
-  namespace NodeJS {
-    export interface Global {
-      signin(): string[];
-    }
-  }
-}
+// declare global {
+//   namespace NodeJS {
+//     export interface Global {
+//       signin(): string[];
+//     }
+//   }
+// }
 declare global {
   var signin: () => string[];//Promise<string[]>;
 }
