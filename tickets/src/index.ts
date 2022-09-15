@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { app } from "./app";
 import { mongoDB } from "./db/mongodb";
 import natsConnector from "./events/nats-connector";
-import natsWrapper from "@wegotickets/common";
+import { natsWrapper } from "./nats-wrapper";
 
 mongoDB(mongoose);
 natsConnector(natsWrapper);
