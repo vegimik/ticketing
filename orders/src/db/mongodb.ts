@@ -1,10 +1,10 @@
-import { randomBytes } from 'crypto';
+import { randomBytes } from "crypto";
 
 export async function mongoDB(mongoose: any) {
   console.log(process.env.ALLUSERSPROFILE);
   console.log(process.env.JWT_KEY);
   // console.log(process.env);
-  
+
   if (!process.env.JWT_KEY) {
     throw new Error("JWT_KEY is not defined");
   }

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { PasswordService } from "../services/password";
 const Schema = mongoose.Schema;
 
@@ -15,6 +16,7 @@ interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
   userId: string;
+  version: numebr;
 }
 
 //An interface that defines the properties of a
@@ -23,10 +25,8 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
   build(attrs: TicketAttrs): TicketDoc;
 }
 
-
-
 // Define our model
-const userSchema = new Schema(
+const ticketSchema = new Schema(
   {
     title: { type: String, required: true, unique: true, lowercase: true },
     price: { type: Number, required: true },
@@ -38,20 +38,22 @@ const userSchema = new Schema(
         ret.id = ret._id;
         delete ret._id;
       },
-    }
+    },
   }
 );
 
-userSchema.statics.build = (arrts: TicketAttrs) => {
+ticketSchema.statics.build = (arrts: TicketAttrs) => {
   return new Ticket(arrts);
 };
 
-userSchema.pre("save", async function (done) {
+ticketSchema.pre("save", async function (done) {
   const user = this;
   done();
 });
 
 // Create the model class
-const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", userSchema);
+const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
+ticketSchema.set("versionKey", "version");
+ticketSchema.plugin(updateIfCurrentPlugin);
 
 export { Ticket };
