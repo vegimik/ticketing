@@ -21,7 +21,7 @@ router.post(
   async (req: Request, res: Response) => {
     const { title, price } = req.body;
 
-    const ticket = Ticket.build({
+    const ticket =await  Ticket.build({
       title,
       price,
       userId: req.currentUser!.id,
@@ -33,6 +33,7 @@ router.post(
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
+      version: ticket.version
     });
 
     res.status(201).send(ticket);

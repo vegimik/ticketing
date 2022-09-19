@@ -16,7 +16,7 @@ interface TicketDoc extends mongoose.Document {
   title: string;
   price: number;
   userId: string;
-  version: numebr;
+  version: number;
 }
 
 //An interface that defines the properties of a
