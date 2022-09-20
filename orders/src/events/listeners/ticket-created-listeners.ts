@@ -31,3 +31,4 @@ interface TicketCreatedEvent {
   };
 }
 
+export { TicketCreatedEvent };

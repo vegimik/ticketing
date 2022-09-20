@@ -3,9 +3,11 @@ import request from "supertest";
 import { Ticket } from "../../models/ticket";
 import { OrderStatus } from "../../types/order-status";
 import { natsWrapper } from "../../nats-wrapper";
+import mongoose from "mongoose";
 
 const buildTicket = async () => {
   const ticket = await Ticket.build({
+    id: new mongoose.Types.ObjectId().toHexString(),
     title: "concert",
     price: 20,
   });
