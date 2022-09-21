@@ -8,6 +8,7 @@ interface TicketAttrs {
   title: string;
   price: number;
   userId: string;
+  orderId?:string;
 }
 
 //An interface that defines the properties of a
@@ -17,6 +18,7 @@ interface TicketDoc extends mongoose.Document {
   price: number;
   userId: string;
   version: number;
+  orderId?:string;
 }
 
 //An interface that defines the properties of a
@@ -31,6 +33,7 @@ const ticketSchema = new Schema(
     title: { type: String, required: true, unique: true, lowercase: true },
     price: { type: Number, required: true },
     userId: { type: String, required: true },
+    orderId: { type: String, required: true },
   },
   {
     toJSON: {

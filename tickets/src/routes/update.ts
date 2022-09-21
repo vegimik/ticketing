@@ -1,4 +1,4 @@
-import { NotFoundError, NotAuthorizedError, requireAuth } from "@wegotickets/common";
+import { NotFoundError, NotAuthorizedError, requireAuth, BadRequestError } from "@wegotickets/common";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import { Ticket } from "../models/ticket";
@@ -22,6 +22,10 @@ router.put(
 
     if (!ticket) {
       throw new NotFoundError();
+    }
+
+    if (ticket.orderId) {
+      throw new BadRequestError("Cannot edit a reserved ticket");
     }
 
     if (ticket.userId !== req.currentUser!.id) {

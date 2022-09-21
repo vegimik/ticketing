@@ -6,7 +6,6 @@ export default class TicketUpdatePublisher extends Publisher<TicketUpdatedEvent>
   subject: Subjects.TickerUpdated = Subjects.TickerUpdated;
 }
 
-
 interface TicketUpdatedEvent {
   subject: Subjects.TickerUpdated;
   data: {
@@ -15,5 +14,6 @@ interface TicketUpdatedEvent {
     price: number;
     userId: string;
     version: number;
+    orderId?: string;
   };
 }

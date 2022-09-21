@@ -1,4 +1,6 @@
+import { OrderCreatedListener } from "./listeners/order-created-listeners";
 import { randomBytes } from "crypto";
+import { OrderCancelledListener } from "./listeners/order-cancelled-listener";
 
 export default async function natsConnector(natsWrapper: any) {
   if (!process.env.NATS_CLIENT_ID) {
@@ -13,6 +15,9 @@ export default async function natsConnector(natsWrapper: any) {
     throw new Error("NATS_CLUSTER_ID is not defined");
   }
   try {
+    new OrderCreatedListener(natsWrapper.client).listen();
+    new OrderCancelledListener(natsWrapper.client).listen();
+
     await natsWrapper.connect(
       process.env.NATS_CLUSTER_ID,
       process.env.NATS_CLIENT_ID,
