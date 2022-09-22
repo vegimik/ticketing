@@ -1,9 +1,8 @@
-// import TicketCreatedEvent from "@wegotickets/common/build/events/_ticketCreatedEvent";
-import Listener from "@wegotickets/common/build/events/_listener";
-import { Subjects } from "@wegotickets/common";
-import { Message } from "node-nats-streaming";
+import { Message } from 'node-nats-streaming';
 import { queueGroupName } from "./queue-group-name";
 import { Ticket } from "../../models/ticket";
+import { Subjects } from "@wegotickets/common";
+import Listener from "@wegotickets/common/build/events/_listener";
 
 export default class TicketCreatedListeners extends Listener<TicketCreatedEvent> {
   subject: Subjects.TicketCreated = Subjects.TicketCreated;

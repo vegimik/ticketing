@@ -1,8 +1,4 @@
-import { randomBytes } from "crypto";
-import nats, { Stan } from "node-nats-streaming";
-import ExpirationCompleteListener from "./listeners/expiration-complete-listener";
-import TicketCreatedListeners from "./listeners/ticket-created-listeners";
-import TicketUpdatedListeners from "./listeners/ticket-updated-listeners";
+import { OrderCreatedListener } from "./listeners/order-created-listeners";
 
 export default async function natsConnector(natsWrapper: any) {
   if (!process.env.NATS_CLIENT_ID) {
@@ -22,7 +18,6 @@ export default async function natsConnector(natsWrapper: any) {
       process.env.NATS_CLIENT_ID,
       process.env.NATS_URL
     );
-
     natsWrapper.client.on("close", () => {
       console.log("Listener diconnected from NATS!");
       process.exit();
@@ -30,10 +25,8 @@ export default async function natsConnector(natsWrapper: any) {
 
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
-
-    new TicketCreatedListeners(natsWrapper.client).listen();
-    new TicketUpdatedListeners(natsWrapper.client).listen();
-    new ExpirationCompleteListener(natsWrapper.client).listen();
+    
+    new OrderCreatedListener(natsWrapper.client).listen();
   } catch (error) {
     console.error(error);
   }
