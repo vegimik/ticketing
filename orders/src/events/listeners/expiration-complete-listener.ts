@@ -1,11 +1,10 @@
-import { OrderCancelledListener } from "./../../../../tickets/src/events/listeners/order-cancelled-listener";
 import { OrderStatus, Subjects } from "@wegotickets/common";
 import ExpirationCompleteEvent from "@wegotickets/common/build/events/expiration-complete-event";
 import Listener from "@wegotickets/common/build/events/_listener";
 import { Message } from "node-nats-streaming";
 import { Order } from "../../models/order";
-import { queueGroupName } from "./queue-group-name";
 import OrderCacelledPublisher from "../publishers/order-cancelled-publisher";
+import { queueGroupName } from "./queue-group-name";
 
 export default class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent> {
   subject: Subjects.ExpirationComplete = Subjects.ExpirationComplete;
