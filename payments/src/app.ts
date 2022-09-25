@@ -5,6 +5,7 @@ import cookieSession from "cookie-session";
 import jwt from "jsonwebtoken";
 import { currentUser } from "./middlewares/current-user";
 import { createChargeRouter } from "./routes/new";
+import { getAllPayments } from "./routes/index";
 
 const app = express();
 app.set("trust proxy", true);
@@ -18,6 +19,7 @@ app.use(
 
 app.use(currentUser);
 app.use(createChargeRouter);
+app.use(getAllPayments);
 
 app.all("*", async (req, res, next) => {
   throw new NotFoundError();

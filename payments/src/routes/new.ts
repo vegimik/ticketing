@@ -1,8 +1,7 @@
-import { validateRequest } from './../../../common/src/middlewares/validate-request';
-import express, { Request, Response } from "express";
-import { app } from "../app";
+import { requireAuth, validateRequest } from "@wegotickets/common";
+import express, {Request, Response} from "express";
 import { body } from "express-validator";
-import { requireAuth } from "@wegotickets/common";
+
 
 const router = express.Router();
 
@@ -15,7 +14,5 @@ router.post(
     res.send({ success: true });
   }
 );
-
-
 
 export { router as createChargeRouter };

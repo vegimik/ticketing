@@ -5,9 +5,6 @@ import natsConnector from "./events/nats-connector";
 import { natsWrapper } from "./nats-wrapper";
 
 mongoDB(mongoose);
-console.log('====================================');
-console.log('Starting up...', natsWrapper);
-console.log('====================================');
 natsConnector(natsWrapper);
 
 app.listen(3000, () => {

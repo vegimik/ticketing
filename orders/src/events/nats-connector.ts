@@ -1,5 +1,3 @@
-import { randomBytes } from "crypto";
-import nats, { Stan } from "node-nats-streaming";
 import ExpirationCompleteListener from "./listeners/expiration-complete-listener";
 import TicketCreatedListeners from "./listeners/ticket-created-listeners";
 import TicketUpdatedListeners from "./listeners/ticket-updated-listeners";
