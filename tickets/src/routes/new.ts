@@ -17,11 +17,11 @@ router.post(
       .isFloat({ gt: 0 })
       .withMessage("Price must be greater than 0"),
   ],
-  validateRequest,
+  // validateRequest,
   async (req: Request, res: Response) => {
     const { title, price } = req.body;
 
-    const ticket =await  Ticket.build({
+    const ticket = await Ticket.build({
       title,
       price,
       userId: req.currentUser!.id,
@@ -33,7 +33,7 @@ router.post(
       title: ticket.title,
       price: ticket.price,
       userId: ticket.userId,
-      version: ticket.version
+      version: ticket.version,
     });
 
     res.status(201).send(ticket);

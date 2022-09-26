@@ -1,9 +1,8 @@
-import jwt  from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import request from "supertest";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import { app } from "../app";
-
 
 jest.mock("../../nats-wrapper");
 
@@ -40,24 +39,24 @@ afterAll(async () => {
 //   }
 // }
 declare global {
-  var signin: () => string[];//Promise<string[]>;
+  var signin: (id?:string) => string[]; //Promise<string[]>;
 }
 
-global.signin = () => {
+global.signin = (id?: string) => {
   // const payload={
   //   id:'12345678',
   //   email: 'vegimik@gmail.com'
   // }
-  const payload={
-    id: new mongoose.Types.ObjectId().toHexString(),
-    email: 'vegimik@gmail.com'
-  }
-  const jwtToken=jwt.sign(payload,process.env.JWT_KEY!);
-  
-  const session={
-    jwt:jwtToken
-  }
-  const sessionJson=JSON.stringify(session);
-  const base64=Buffer.from(sessionJson).toString('base64');
+  const payload = {
+    id: id || new mongoose.Types.ObjectId().toHexString(),
+    email: "vegimik@gmail.com",
+  };
+  const jwtToken = jwt.sign(payload, process.env.JWT_KEY!);
+
+  const session = {
+    jwt: jwtToken,
+  };
+  const sessionJson = JSON.stringify(session);
+  const base64 = Buffer.from(sessionJson).toString("base64");
   return [`express:sess=${base64}`];
 };

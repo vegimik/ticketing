@@ -24,7 +24,7 @@ router.post(
       .isEmpty()
       .custom((input: string) => {
         mongoose.Types.ObjectId.isValid(input);
-      })
+       })
       .withMessage("TicketId must be provided"),
   ],
   validateRequest,
@@ -36,7 +36,7 @@ router.post(
     }
 
     const isReserved = await ticket.isReserved();
-    if (isReserved) {
+    if (!isReserved) {
       throw new BadRequestError("Ticket is already reserved");
     }
 
@@ -53,7 +53,7 @@ router.post(
 
     new OrderCreatedPublisher(natsWrapper.client).publish({
       id: order.id,
-      version:order.version,
+      version: order.version,
       status: order.status,
       userId: order.userId,
       expiresAt: order.expiresAt.toISOString(),

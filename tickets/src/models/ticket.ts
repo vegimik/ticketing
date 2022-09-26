@@ -33,7 +33,7 @@ const ticketSchema = new Schema(
     title: { type: String, required: true, unique: true, lowercase: true },
     price: { type: Number, required: true },
     userId: { type: String, required: true },
-    orderId: { type: String, required: true },
+    orderId: { type: String, required: false },
   },
   {
     toJSON: {
