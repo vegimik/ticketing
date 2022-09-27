@@ -1,5 +1,6 @@
 import { OrderCancelledListener } from "./listeners/order-cancelled-listener";
 import { OrderCreatedListener } from "./listeners/order-created-listeners";
+import PaymentCreatedPublisher from "./publishers/payment-created-publisher";
 
 export default async function natsConnector(natsWrapper: any) {
   if (!process.env.NATS_CLIENT_ID) {

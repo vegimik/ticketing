@@ -1,4 +1,5 @@
 import ExpirationCompleteListener from "./listeners/expiration-complete-listener";
+import PaymentCreatedListener from "./listeners/payment-created-listener";
 import TicketCreatedListeners from "./listeners/ticket-created-listeners";
 import TicketUpdatedListeners from "./listeners/ticket-updated-listeners";
 
@@ -32,6 +33,7 @@ export default async function natsConnector(natsWrapper: any) {
     new TicketCreatedListeners(natsWrapper.client).listen();
     new TicketUpdatedListeners(natsWrapper.client).listen();
     new ExpirationCompleteListener(natsWrapper.client).listen();
+    new PaymentCreatedListener(natsWrapper.client).listen();
   } catch (error) {
     console.error(error);
   }
