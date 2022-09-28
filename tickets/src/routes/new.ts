@@ -17,7 +17,7 @@ router.post(
       .isFloat({ gt: 0 })
       .withMessage("Price must be greater than 0"),
   ],
-  // validateRequest,
+  validateRequest,
   async (req: Request, res: Response) => {
     const { title, price } = req.body;
 

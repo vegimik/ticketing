@@ -1,9 +1,8 @@
 import express from "express";
 import { json } from "body-parser";
-import { errorHandler, NotFoundError } from "@wegotickets/common";
+import { currentUser, errorHandler, NotFoundError } from "@wegotickets/common";
 import cookieSession from "cookie-session";
 import jwt from "jsonwebtoken";
-import { currentUser } from "./middlewares/current-user";
 import { createChargeRouter } from "./routes/new";
 import { getAllPayments } from "./routes/index";
 

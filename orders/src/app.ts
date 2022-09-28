@@ -1,12 +1,11 @@
 import express from "express";
 import { json } from "body-parser";
-import { errorHandler, NotFoundError } from "@wegotickets/common";
+import { currentUser, errorHandler, NotFoundError } from "@wegotickets/common";
 import cookieSession from "cookie-session";
 import jwt from "jsonwebtoken";
 import { createOrderRouter } from "./routes/new";
 import { getOrderRouter } from "./routes/show";
 import { deleteOrderRouter } from "./routes/delete";
-import { currentUser } from "./middlewares/current-user";
 
 const app = express();
 app.set("trust proxy", true);

@@ -19,7 +19,6 @@ it("response with details about the current user", async () => {
     .send()
     .expect(200);
 
-  console.log(response.body);
   expect(response.body.currentUser.email).toEqual("sample@gmail.com");
 });
 
@@ -32,7 +31,6 @@ it("response with details about the current user, version 2", async () => {
     .send()
     .expect(200);
 
-  console.log(response.body);
   expect(response.body.currentUser.email).toEqual("sample@gmail.com");
 });
 

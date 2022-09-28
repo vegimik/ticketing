@@ -1,6 +1,7 @@
-import { Message } from "node-nats-streaming";
-import { Subjects, OrderStatus } from "@wegotickets/common";
-import Listener from "@wegotickets/common/build/events/base/_listener";
+import { Message } from 'node-nats-streaming';
+import { Subjects } from "@wegotickets/common";
+import Listener from "@wegotickets/common/build/events/_listener";
+import OrderCreatedEvent from "@wegotickets/common/build/events/_orderCreatedEvent";
 import { expirationQueue } from "../../queues/expiration-queue";
 import { queueGroupName } from "./queue-group-name";
 
@@ -23,20 +24,3 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent> {
     msg.ack();
   }
 }
-
-interface OrderCreatedEvent extends Event {
-  subject: Subjects.OrderCreated;
-  data: {
-    id: string;
-    version: number;
-    status: OrderStatus;
-    userId: string;
-    expiresAt: string;
-    ticket: {
-      id: string;
-      price: number;
-    };
-  };
-}
-
-export { OrderCreatedEvent };

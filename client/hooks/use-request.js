@@ -13,6 +13,9 @@ export default ({url, method, body, onSuccess})=>{
             }
             return response.data;
         } catch (error) {
+            if (!error.response.data.errors) {
+                setErrors(<div className="alert alert-danger">{error.message}</div>);                
+            } else {
             setErrors(<div className="alert alert-danger">
             <h4>Ooops...</h4>
             <ul className='my-0'>
@@ -21,6 +24,8 @@ export default ({url, method, body, onSuccess})=>{
             ))}
             </ul>
         </div>);
+            }
+           
         throw error
         }
     }

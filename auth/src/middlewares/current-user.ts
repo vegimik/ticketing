@@ -27,7 +27,6 @@ export const currentUser = (
   }
 
   try {
-    console.log("currentUserMiddleware: ", jwtParsed);
 
     const payload = jwt.verify(
       jwtParsed, // req.session.jwt,
