@@ -1,15 +1,15 @@
-import express, { Request, Response } from "express";
 import {
-  BadRequestError,
-  NotFoundError,
   requireAuth,
   validateRequest,
+  NotFoundError,
+  BadRequestError,
+  OrderStatus,
 } from "@wegotickets/common";
+import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { Ticket } from "../models/ticket";
-import { Order } from "../models/order";
-import { OrderStatus } from "../types/order-status";
 import OrderCreatedPublisher from "../events/publishers/order-created-publisher";
+import { Order } from "../models/order";
+import { Ticket } from "../models/ticket";
 import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
@@ -47,7 +47,7 @@ router.post(
 
     const order = Order.build({
       userId: req.currentUser!.id,
-      status: OrderStatus.Created,
+      status: OrderStatus.Updated,
       expiresAt: expiration,
       ticket,
     });

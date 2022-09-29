@@ -62,7 +62,6 @@ router.post(
       process.env.JWT_KEY
       // config.secret
     );
-    console.log(process.env.JWT_KEY, userJwt);
 
     // // Store the user id in a JWT token
     // req.session = {

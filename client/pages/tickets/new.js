@@ -12,7 +12,7 @@ const NewTicket=()=>{
             title,
             price
         },
-        onSuccess:()=>Router.push('/')
+        onSuccess:()=>Router.push('/tickets')
     });
 
 
@@ -46,8 +46,8 @@ const NewTicket=()=>{
             <button type="submit" 
             className="btn btn-primary float-end mt-3"
             >Submit</button>
-            <div class="row">
-                <div class="col-12">
+            <div className="row">
+                <div className="col-12">
                     {errors}
                 </div>
             </div>

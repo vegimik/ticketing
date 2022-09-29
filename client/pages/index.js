@@ -16,7 +16,7 @@ const LoadingPage= ({ currentUser, tickets})=>{
     ))
     return (
         <div>
-            <h1>Tickets</h1>
+            {/* <h1>Tickets</h1>
             { <table className="table">
                 <thead>
                     <tr>
@@ -28,7 +28,7 @@ const LoadingPage= ({ currentUser, tickets})=>{
                 <tbody>
                     {ticketsList}
                 </tbody>
-            </table> }
+            </table> } */}
         </div>
     )
 }

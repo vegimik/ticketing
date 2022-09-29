@@ -1,9 +1,8 @@
-import { NotAuthorizedError, NotFoundError } from "@wegotickets/common";
+import { NotAuthorizedError, NotFoundError, OrderStatus } from "@wegotickets/common";
 import express from "express";
 import OrderCacelledPublisher from "../events/publishers/order-cancelled-publisher";
 import { Order } from "../models/order";
 import { natsWrapper } from "../nats-wrapper";
-import { OrderStatus } from "../types/order-status";
 
 const router = express.Router();
 
