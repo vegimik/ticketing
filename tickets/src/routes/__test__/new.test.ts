@@ -52,13 +52,13 @@ it("returns an error if an invlaid price is provided", async () => {
     })
     .expect(400);
 
-  await request(app)
-    .post("/api/tickets")
-    .set("Cookie", global.signin())
-    .send({
-      title: 10,
-    })
-    .expect(400);
+  // await request(app)
+  //   .post("/api/tickets")
+  //   .set("Cookie", global.signin())
+  //   .send({
+  //     title: 10,
+  //   })
+  //   .expect(400);
 });
 
 it("creates a ticket with valid inputs", async () => {

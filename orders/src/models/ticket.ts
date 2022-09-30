@@ -1,7 +1,5 @@
+import { OrderStatus } from "@wegotickets/common";
 import mongoose from "mongoose";
-import { updateIfCurrentPlugin } from "mongoose-update-if-current";
-import { isExpressionWithTypeArguments } from "typescript";
-import { OrderStatus } from "../types/order-status";
 import { Order } from "./order";
 
 interface TicketAttrs {
@@ -66,10 +64,7 @@ ticketSchema.methods.isReserved = async function () {
   const existingOrder = await Order.findOne({
     ticket: this,
     status: {
-      $in: [
-        OrderStatus.AwaitingPayment,
-        OrderStatus.Complete,
-      ],
+      $in: [OrderStatus.AwaitingPayment, OrderStatus.Complete],
     },
   });
   return !!existingOrder;
