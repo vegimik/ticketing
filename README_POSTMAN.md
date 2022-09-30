@@ -1,5 +1,7 @@
 # Postman testing: Process flow
 
+## Published api: https://documenter.getpostman.com/view/20792740/2s7Yn1fNGB
+
 1.  Sign in with your user's credentials.
 
 2. Create a new ticket.
