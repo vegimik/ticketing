@@ -1,7 +1,7 @@
 import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import mongoose from "mongoose";
-import { OrderStatus } from "../types/order-status";
-import { TicketDoc } from "./ticket";
+import { OrderStatus } from '@wegotickets/common';
+import { TicketDoc } from './ticket';
 const Schema = mongoose.Schema;
 
 //An intereface that defines the properties of a Order.
