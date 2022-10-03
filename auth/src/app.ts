@@ -5,6 +5,7 @@ import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
+import { newRouter } from "./routes/new";
 import cookieSession from "cookie-session";
 import jwt from "jsonwebtoken";
 
@@ -19,6 +20,7 @@ app.use(
 );
 
 app.use(currentUserRouter);
+app.use(newRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);

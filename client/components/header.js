@@ -4,6 +4,8 @@ export default ({currentUser})=>{
 const links=[
     !currentUser && {href:'/auth/signup', as:'auth/signup', label:'Sign Up'},
     !currentUser && {href:'/auth/signin', as:'auth/signin', label:'Sign In'},
+    currentUser && {href:'/users', as:'users', label:'Show Users'},
+    currentUser && {href:'/users/new', as:'users/new', label:'Create New User'},
     currentUser && {href:'/tickets', as:'tickets', label:'Show Tickets'},
     currentUser && {href:'/tickets/new', as:'tickets/new', label:'Create New Ticket'},
     currentUser && {href:'/orders', as:'orders', label:'My Orders'},
