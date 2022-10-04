@@ -8,6 +8,7 @@ import { signupRouter } from "./routes/signup";
 import { newRouter } from "./routes/new";
 import cookieSession from "cookie-session";
 import jwt from "jsonwebtoken";
+import { indexUserRouter } from "./routes/index";
 
 const app = express();
 app.set("trust proxy", true);
@@ -24,6 +25,7 @@ app.use(newRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
+app.use(indexUserRouter)
 
 app.all("*", async (req, res, next) => {
   throw new NotFoundError();
