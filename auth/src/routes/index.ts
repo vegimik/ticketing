@@ -9,6 +9,15 @@ import { User } from "../models/user";
 
 const router = express.Router();
 
+router.get("/api/users/getall", (req: Request, res: Response) =>
+  User.find({}, function (err: any, users: any) {
+    if (err) {
+      throw new DatabaseConnectionError();
+    }
+    res.json(users);
+  })
+);
+
 router.get("/api/users/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
 

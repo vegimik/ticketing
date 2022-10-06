@@ -8,8 +8,13 @@ import { Order } from "../models/order";
 
 const router = express.Router();
 
+router.get("/api/orders/getAll", requireAuth, async (req, res) => {
+  const orders = await Order.find().populate("ticket");
+
+  res.status(200).send(orders);
+});
+
 router.get("/api/orders", requireAuth, async (req, res) => {
-  
   const orders = await Order.find({ userId: req.currentUser!.id }).populate(
     "ticket"
   );
