@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import useRequest from '../../hooks/use-request';
+import { CCard, CCardHeader, CCardBody, CCardTitle, CCardText, CButton  } from '@coreui/react'
 
 const IndexTickets = ({tickets}) => {
      const ticketsList=tickets.map(ticket=>(
@@ -21,24 +22,31 @@ const IndexTickets = ({tickets}) => {
         onSuccess:(ticket)=>console.log(ticket)
     });
 
-    return <div>
-        <h1>Tickets</h1>
-        <Link href="/tickets/new">
-        Create Ticket
-        </Link>
-        <table className="table">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Price</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {ticketsList}
-                </tbody>
-            </table> 
-    </div>
+    return <CCard className='mt-6'>
+                <CCardHeader component="h1">
+                <Link href="/tickets/new">
+                Create Ticket
+                </Link></CCardHeader>
+                <CCardBody>
+                    <CCardTitle>Tickets</CCardTitle>
+                    <CCardText>       
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {ticketsList}
+                        </tbody>
+                    </table> 
+                    </CCardText>
+                    {/* <CButton href=\"#">Go somewhere</CButton> */}
+                </CCardBody>
+            </CCard>
+           
 }
 
 IndexTickets.getInitialProps = async (context, client) => {
