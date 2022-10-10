@@ -40,14 +40,20 @@ const OrderShow = ({ order, currentUser }) => {
     }, [timeLeft]);
 
     return (
-        <div>
-            <h1>{isTimesUp(timeLeft)}</h1>
-            <StripeCheckout
+        <div class="card">
+        <div class="card-header">
+        {isTimesUp(timeLeft)}
+        </div>
+        <div class="card-body">
+        <h5 class="card-title">Price: {ticket.price}</h5>
+        <p class="card-text"></p>
+        <a  class="btn btn-primary" ><StripeCheckout
             token={(token)=>doRequest({token: token.id})}
             stripeKey="pk_test_51LmEuaCyEPeS0MkWmHywlxKKi6YWrRFxjfgsB5j3ieQqloy8V0RVhhYZvzK05L3gpnGFmPQE5n1JR20Men6ltTLC00T7qwtoS3"
             amount={order.ticket.price*100}
-            email={currentUser.email}/> 
+            email={currentUser.email}/> </a>
         </div>
+    </div>
     );
 };
 

@@ -13,12 +13,16 @@ const TicketShow=({ticket})=>{
         }
     });
 
-    return <div>
-        <h1>{ticket.title}</h1>
-        <h4>Price: {ticket.price}</h4>
-        {errors}
-        <button onClick={()=>doRequest()} className="btn btn-primary">Purchase</button>
-    </div>
+    return <div class="card">
+                <div class="card-header">
+                {ticket.title}
+                </div>
+                <div class="card-body">
+                <h5 class="card-title">Price: {ticket.price}</h5>
+                <p class="card-text"></p>
+                <a  class="btn btn-primary" onClick={()=>doRequest()}>Purchase</a>
+                </div>
+            </div>
 }
 
 TicketShow.getInitialProps = async (context, client) => {

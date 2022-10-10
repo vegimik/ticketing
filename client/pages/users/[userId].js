@@ -9,18 +9,16 @@ const UserShow = ({ user, currentUser }) => {
     console.log('====================================');
 
     return (
-        <div>  
-            <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src="holder.js/100px180" />
-            <Card.Body>
-                <Card.Title>User</Card.Title>
-                <Card.Text>
-                    {user.email}
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
-            </Card>
-        </div>
+            <div class="card">
+                <div class="card-header">
+                User
+                </div>
+                <div class="card-body">
+                <h5 class="card-title">{user.email}</h5>
+                <p class="card-text"></p>
+                {/* <a  class="btn btn-primary" >Go Somewhere</a> */}
+                </div>
+            </div>
     );
 };
 
