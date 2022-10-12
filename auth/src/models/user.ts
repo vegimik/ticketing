@@ -55,4 +55,4 @@ userSchema.pre("save", async function (done) {
 // Create the model class
 const User = mongoose.model<UserDoc, UserModel>("user", userSchema);
 
-export { User };
+export { UserDoc, User };
