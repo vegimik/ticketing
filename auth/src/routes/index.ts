@@ -6,6 +6,7 @@ import {
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { User } from "../models/user";
+import { Wallet } from "../models/wallet";
 
 const router = express.Router();
 
