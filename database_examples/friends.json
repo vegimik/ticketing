@@ -1,0 +1,20 @@
+{
+    "_id" : ObjectId("64f9ae2d7e514c18e02628ba"),
+    "name" : "Mike",
+    "friends" : [
+        {
+            "name" : "Lora",
+            "age" : NumberInt(23),
+            "registered" : true
+        },
+        {
+            "name" : "Bob",
+            "age" : NumberInt(25),
+            "registered" : false
+        },
+        {
+            "name" : "Steve",
+            "age" : NumberInt(27)
+        }
+    ]
+}
